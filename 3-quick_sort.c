@@ -1,14 +1,16 @@
 #include "sort.h"
 
 /**
- *partition - organize subtable around a pivot
- *@array: array board
- *@low : element most low array
- *@high: element most high array
- *@size: size_t
- *Return: final position pivot
+ * lomuto_partition - Scanning an array with lomuto partition scheme.
+ * @array: The array to be sorted.
+ * @low: The low index.
+ * @high: The high index.
+ * @size: The size of the array.
+ *
+ * Return: The index pivot.
  */
-int partition(int array[], int low, int high, size_t size)
+
+int	lomuto_partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high];
 	int i = low - 1;
@@ -42,37 +44,33 @@ int partition(int array[], int low, int high, size_t size)
 }
 
 /**
- *quicksort - function that sorts an array of integers in ascending
- *@array: int value array
- *@high: element most high array
- *@low: element most low array
- *@size: size_t
- *Return: void
+ * quick_sort_recursive - Sort an array in ascending order.
+ * @array: The array.
+ * @low: The lowest index of the partition to sort.
+ * @high: The highest index of the partition to sort.
+ * @size: Number of elements in the array.
  */
-void quicksort(int *array, int high, int low, size_t size)
-{
 
+void	quick_sort_recursive(int *array, int low, int high, size_t size)
+{
 	if (low < high)
 	{
-		int part = partition(array, low, high, size);
+		int pivot = lomuto_partition(array, low, high, size);
 
-		quicksort(array, low, part - 1, size);
-		quicksort(array, part + 1, high, size);
+		quick_sort_recursive(array, low, pivot - 1, size);
+		quick_sort_recursive(array, pivot + 1, high, size);
 	}
 }
 
 /**
- *quick_sort - function that sorts an array of integers in ascending
- *@array: int value array
- *@size: size_t
- *Return: void
+ * quick_sort - Sort an array in ascending order.
+ * @array: The array.
+ * @size: Number of elements in the array.
  */
 
-void quick_sort(int *array, size_t size)
+void	quick_sort(int *array, size_t size)
 {
-	if (!array || size < 2)
+	if (array == NULL || size < 2)
 		return;
-
-	quicksort(array, 0, size - 1, size);
+	quick_sort_recursive(array, 0, size - 1, size);
 }
-
