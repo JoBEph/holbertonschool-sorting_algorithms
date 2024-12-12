@@ -3,8 +3,9 @@
 /**
  *partition - organize subtable around a pivot
  *@array: array board
- *low : element most low array
+ *@low : element most low array
  *@high: element most high array
+ *@size: size_t
  *Return: final position pivot
  */
 int partition(int array[], int low, int high, size_t size)
@@ -12,7 +13,7 @@ int partition(int array[], int low, int high, size_t size)
 	int pivot = array[high];
 	int i = low - 1;
 	int j = low;
-	
+
 	while (j < high)
 	{
 		if (array[j] < pivot)
@@ -30,7 +31,7 @@ int partition(int array[], int low, int high, size_t size)
 		j++;
 	}
 	if (array[i + 1] != array[high])
-	{	
+	{
 		int temp = array[i + 1];
 
 		array[i + 1] = array[high];
@@ -45,14 +46,15 @@ int partition(int array[], int low, int high, size_t size)
  *@array: int value array
  *@high: element most high array
  *@low: element most low array
+ *@size: size_t
  *Return: void
  */
-void quicksort(int *array,int high, int low, size_t size)
+void quicksort(int *array, int high, int low, size_t size)
 {
 
 	if (low < high)
 	{
-		int part = partition(array,low, high, size);
+		int part = partition(array, low, high, size);
 
 		quicksort(array, low, part - 1, size);
 		quicksort(array, part + 1, high, size);
