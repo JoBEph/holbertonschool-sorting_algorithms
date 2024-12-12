@@ -13,7 +13,7 @@ int partition(int array[], int low, int high, size_t size)
 	int i = low - 1;
 	int j = low;
 	
-	while (high > j)
+	while (j < high)
 	{
 		if (array[j] < pivot)
 		{
@@ -49,11 +49,11 @@ int partition(int array[], int low, int high, size_t size)
  */
 void quicksort(int *array,int high, int low, size_t size)
 {
-	int part;
 
 	if (low < high)
 	{
-		part = partition(array,low, high, size);
+		int part = partition(array,low, high, size);
+
 		quicksort(array, low, part - 1, size);
 		quicksort(array, part + 1, high, size);
 	}
